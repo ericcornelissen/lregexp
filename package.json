@@ -1,0 +1,29 @@
+{
+  "name": "@ericcornelissen/lregexp",
+  "description": "Transparently create linear-time regular expressions",
+  "version": "1.0.1",
+  "license": "MIT",
+  "type": "module",
+  "exports": "./index.js",
+  "bugs": {
+    "url": "https://github.com/ericcornelissen/lregexp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericcornelissen/depreman.git"
+  },
+  "author": {
+    "name": "Eric Cornelissen",
+    "email": "ericornelissen@gmail.com",
+    "url": "https://ericcornelissen.dev/"
+  },
+  "keywords": [
+    "regexp",
+    "regex",
+    "linear",
+    "flag"
+  ],
+  "dependencies": {
+    "is-supported-regexp-flag": "^2.0.0"
+  }
+}
