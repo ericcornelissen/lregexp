@@ -1,0 +1,12 @@
+# Ignore file for npm (https://docs.npmjs.com/cli/using-npm/developers)
+
+/*
+
+## Allowlist
+!index.js
+!LICENSE
+!package.json
+!README.md
+
+!index.cjs
+!is-supported-regexp-flag.cjs
