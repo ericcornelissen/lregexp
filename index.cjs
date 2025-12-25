@@ -1,4 +1,4 @@
-const isSupportedRegexpFlag = require("is-supported-regexp-flag");
+const isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
 
 const RegExp_ = globalThis.RegExp;
 
