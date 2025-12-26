@@ -1,0 +1,39 @@
+name: Test
+on:
+  pull_request: ~
+  push:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  test:
+    name: ${{ matrix.node-version }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 16.0.0
+          - 18.0.0
+          - 19.0.0
+          - 20.0.0
+          - 22.0.0
+          - 24.0.0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          cache: npm
+          node-version: ${{ matrix.node-version }}
+      - name: Install Just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Run tests
+        run: just test
