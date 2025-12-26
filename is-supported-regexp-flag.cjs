@@ -15,12 +15,12 @@
 // ESM version of the code. This file contains a CommonJS version of that.
 
 function isSupportedRegexpFlag(flag) {
-  try {
-    new RegExp('', flag);
-    return true;
-  } catch {
-    return false;
-  }
+	try {
+		new RegExp("", flag);
+		return true;
+	} catch {
+		return false;
+	}
 }
 
 module.exports = isSupportedRegexpFlag;
