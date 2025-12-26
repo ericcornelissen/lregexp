@@ -1,12 +1,6 @@
-/**
- * Usage:
- * - `node bench.js`
- * - `node --enable-experimental-regexp-engine bench.js`
- */
-
 import { Bench } from "tinybench";
 
-import { default as lRegExp } from "./index.js";
+import lRegExp from "./index.js";
 
 const bench = new Bench();
 
