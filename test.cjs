@@ -50,7 +50,7 @@
 /* -------------------------------------------------------------------------- */
 
 function time(cb) {
-	const { performance } = require("node:perf_hooks");
+	const { performance } = require("perf_hooks");
 
 	const start = performance.now();
 	cb();
