@@ -4,7 +4,7 @@ import lRegExp from "./index.js";
 
 const duration = time(() => {
 	const regexp = new lRegExp("(a*)*$");
-	regexp.test("a".repeat(16)+"b");
+	regexp.test("a".repeat(20)+"b");
 });
 
 if (linearTimeEngine() && duration > 1) {

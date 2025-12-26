@@ -1,5 +1,10 @@
 # Configuration file for Just (https://just.systems/)
 
+node_version := `node --version`
+experiment_engine_flag := \
+    if node_version =~ "v(12|13|14).+" { "" } \
+    else { "--enable-experimental-regexp-engine" }
+
 [private]
 @default:
 	just --list
@@ -16,7 +21,7 @@ test: test-cjs test-esm
 test-cjs: test-cjs-linear test-cjs-normal
 [private]
 test-cjs-linear:
-	node --enable-experimental-regexp-engine test.cjs
+	node {{experiment_engine_flag}} test.cjs
 [private]
 test-cjs-normal:
 	node test.cjs
@@ -25,7 +30,7 @@ test-cjs-normal:
 test-esm: test-esm-linear test-esm-normal
 [private]
 test-esm-linear:
-	node --enable-experimental-regexp-engine test.js
+	node {{experiment_engine_flag}} test.js
 [private]
 test-esm-normal:
 	node test.js

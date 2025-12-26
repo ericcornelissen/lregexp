@@ -1,7 +1,7 @@
 {
   "name": "@ericcornelissen/lregexp",
   "description": "Transparently create linear-time regular expressions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -17,6 +17,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ericcornelissen/lregexp.git"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.0 || ^15 || ^16 || ^17 || ^18 || ^19 || ^20 || ^21 || ^22 || ^23 || ^24 || ^25"
   },
   "author": {
     "name": "Eric Cornelissen",

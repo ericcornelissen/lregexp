@@ -3,7 +3,7 @@
 
 	const duration = time(() => {
 		const regexp = new lRegExp("(a*)*$");
-		regexp.test("a".repeat(16) + "b");
+		regexp.test("a".repeat(20) + "b");
 	});
 
 	if (linearTimeEngine() && duration > 1) {
@@ -50,7 +50,7 @@
 /* -------------------------------------------------------------------------- */
 
 function time(cb) {
-	const { performance } = require("node:perf_hooks");
+	const { performance } = require("perf_hooks");
 
 	const start = performance.now();
 	cb();
