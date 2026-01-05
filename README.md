@@ -50,7 +50,8 @@ your regular expressions are incompatible, unless you run it with that CLI
 option. If a regular expression is incompatible the constructor will throw a
 SyntaxError.
 
-To support users of this package we're interested in:
+To support users of this package in writing compatible regular expressions we're
+interested in:
 
 - an ESLint plugin to lint regular expressions and raise warnings for the use of
   regex features not supported by the non-backtracing engine; ([#4])
