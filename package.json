@@ -1,6 +1,6 @@
 {
   "name": "@ericcornelissen/lregexp",
-  "description": "Transparently create linear-time regular expressions",
+  "description": "Transparent linear-time (non-backtracking) regular expressions for libraries",
   "version": "1.0.5",
   "license": "MIT",
   "type": "module",
