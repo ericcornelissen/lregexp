@@ -1,7 +1,7 @@
 {
   "name": "@ericcornelissen/lregexp",
   "description": "Transparent linear-time (non-backtracking) regular expressions for libraries",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "type": "module",
   "exports": {
