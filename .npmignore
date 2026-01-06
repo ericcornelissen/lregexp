@@ -8,6 +8,7 @@
 !LICENSE
 !package.json
 !README.md
+!SECURITY.md
 
 !index.cjs
 !is-supported-regexp-flag.cjs
