@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import isSupportedRegexpFlag from "is-supported-regexp-flag";
 
 let lRegExp = RegExp;
