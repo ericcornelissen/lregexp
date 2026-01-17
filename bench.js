@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { Bench } from "tinybench";
 
 import lRegExp from "./index.js";
