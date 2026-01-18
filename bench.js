@@ -43,6 +43,12 @@ bench
 	})
 	.add("new lRegExp(/.../flags, flags)", () => {
 		new lRegExp(/foobar/g, "g");
+	})
+	.add("RegExp(/.../flags)", () => {
+		RegExp(/foobar/g);
+	})
+	.add("lRegExp(/.../flags)", () => {
+		lRegExp(/foobar/g);
 	});
 
 await bench.run();
