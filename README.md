@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # lRegExp
 
 Transparent linear-time ([non-backtracking]) regular expressions for libraries.

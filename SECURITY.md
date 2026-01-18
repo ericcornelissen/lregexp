@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # Security Policy
 
 All security issues in `@ericcornelissen/lregexp` should be reported publicly as

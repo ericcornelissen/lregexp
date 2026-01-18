@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 const isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
 
 /**
