@@ -11,9 +11,15 @@ const isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
 let lRegExp = RegExp;
 
 if (isSupportedRegexpFlag("l")) {
-	const RegExp_ = globalThis.RegExp;
-	lRegExp = function(pattern, flags="") {
-		return new RegExp_(pattern, `${flags}l`);
+	lRegExp = function(pattern, flags) {
+		if (flags === undefined) {
+			flags = "";
+			if (pattern instanceof RegExp && pattern.flags) {
+				flags = pattern.flags.replace(/l/g, "");
+			}
+		}
+
+		return new RegExp(pattern, `${flags}l`);
 	};
 }
 
