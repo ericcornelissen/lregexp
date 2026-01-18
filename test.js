@@ -21,7 +21,7 @@ import lRegExp from "./index.js";
 
 /* --- Pattern -------------------------------------------------------------- */
 
-{
+{ // With new
 	let got, want;
 
 	got = new lRegExp("from string pattern").source;
@@ -44,6 +44,34 @@ import lRegExp from "./index.js";
 
 	got = new lRegExp(new lRegExp("from lRegExp pattern")).source;
 	want = new RegExp(new lRegExp("from lRegExp pattern")).source;
+	if (got !== want) {
+		throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+	}
+}
+
+{ // Without new
+	let got, want;
+
+	got = lRegExp("from string pattern").source;
+	want = RegExp("from string pattern").source;
+	if (got !== want) {
+		throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+	}
+
+	got = lRegExp(/from literal pattern/).source;
+	want = RegExp(/from literal pattern/).source;
+	if (got !== want) {
+		throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+	}
+
+	got = lRegExp(new RegExp("from RegExp pattern")).source;
+	want = RegExp(new RegExp("from RegExp pattern")).source;
+	if (got !== want) {
+		throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+	}
+
+	got = lRegExp(new lRegExp("from lRegExp pattern")).source;
+	want = RegExp(new lRegExp("from lRegExp pattern")).source;
 	if (got !== want) {
 		throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
 	}
