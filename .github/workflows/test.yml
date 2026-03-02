@@ -10,8 +10,28 @@ on:
 permissions: read-all
 
 jobs:
-  test:
-    name: ${{ matrix.node-version }}
+  test-deno:
+    name: Deno ${{ matrix.deno-version }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        deno-version:
+          - 2.6.8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      # TODO: install Deno@${{ matrix.deno-version }}
+      - name: Install Just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Run tests
+        run: just test-deno
+  test-node:
+    name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -45,4 +65,4 @@ jobs:
       - name: Install dependencies
         run: npm clean-install
       - name: Run tests
-        run: just test
+        run: just test-node

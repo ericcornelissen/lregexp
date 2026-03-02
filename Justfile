@@ -15,22 +15,44 @@ experiment_engine_flag := \
 	echo 'Experimental regular expression engine'
 	node --enable-experimental-regexp-engine bench.js
 
-test: test-cjs test-esm
+test: test-deno test-node
+test-deno: test-deno-linear test-deno-normal
+test-node: test-node-cjs test-node-esm
 
 [private]
-test-cjs: test-cjs-linear test-cjs-normal
+test-node-cjs: test-node-cjs-linear test-node-cjs-normal
 [private]
-test-cjs-linear:
-	node {{experiment_engine_flag}} test.cjs
+test-node-cjs-linear:
+	node {{experiment_engine_flag}} node_test.cjs
 [private]
-test-cjs-normal:
-	node test.cjs
+test-node-cjs-normal:
+	node node_test.cjs
 
 [private]
-test-esm: test-esm-linear test-esm-normal
+test-node-esm: test-node-esm-linear test-node-esm-normal
 [private]
-test-esm-linear:
-	node {{experiment_engine_flag}} test.js
+test-node-esm-linear:
+	node {{experiment_engine_flag}} node_test.js
 [private]
-test-esm-normal:
-	node test.js
+test-node-esm-normal:
+	node node_test.js
+
+[private]
+test-deno-linear:
+	docker run --rm \
+		--entrypoint 'deno' \
+		--workdir '/lregexp' \
+		--mount 'type=bind,source=.,target=/lregexp' \
+		--name 'lregexp-deno-linear' \
+		--env DENO_V8_FLAGS="--enable-experimental-regexp-engine"'' \
+		docker.io/denoland/deno:2.6.8 \
+		test --no-check --allow-read
+[private]
+test-deno-normal:
+	docker run --rm \
+		--entrypoint 'deno' \
+		--workdir '/lregexp' \
+		--mount 'type=bind,source=.,target=/lregexp' \
+		--name 'lregexp-deno-normal' \
+		docker.io/denoland/deno:2.6.8 \
+		test --no-check --allow-read
