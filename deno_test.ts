@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-import lRegExp from "npm:@ericcornelissen/lregexp";
 import { assert } from "jsr:@std/assert";
+
+import lRegExp from "npm:@ericcornelissen/lregexp";
 
 Deno.test("Linear engine should handle pathological input", () => {
   const start = performance.now();
