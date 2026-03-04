@@ -19,6 +19,7 @@
     "url": "git+https://github.com/ericcornelissen/lregexp.git"
   },
   "engines": {
+    "bun": "^1.2.0",
     "deno": "^2.0.0",
     "node": "^12.20.0 || ^14.13.0 || ^15 || ^16 || ^17 || ^18 || ^19 || ^20 || ^21 || ^22 || ^23 || ^24 || ^25"
   },
