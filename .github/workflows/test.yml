@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         deno-version:
-          - 1.0.0
           - 2.0.0
     steps:
       - name: Checkout repository
