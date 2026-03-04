@@ -31,6 +31,13 @@ apply).
 
 [caveats]: #caveats
 
+### Runtimes
+
+This library is compatible with Node.js, Deno, Bun, and major browsers. It only
+takes effect in V8-based runtimes (Node.js, Deno, Chromium-based browsers) when
+the experiment linear-time engine is enabled. Otherwise it falls back to the
+default `RegExp` constructor.
+
 ## Why
 
 Backtracking regular expressions can take exponential time to evaluate, leading

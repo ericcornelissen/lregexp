@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { time, linearTimeEngine } from "./test.cjs";
+import { time, linearTimeEngine } from "./node_test.cjs";
 
 import lRegExp from "./index.js";
 
