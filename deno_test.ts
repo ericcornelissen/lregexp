@@ -4,6 +4,8 @@ import { assert } from "jsr:@std/assert";
 
 import lRegExp from "npm:@ericcornelissen/lregexp";
 
+import { linearTimeEngine } from "./node_test.cjs";
+
 Deno.test("Linear engine should handle pathological input", () => {
   const start = performance.now();
 
@@ -22,12 +24,3 @@ Deno.test("Linear engine should handle pathological input", () => {
       : `matched unexpectedly fast (${duration}ms) with default regexp engine`,
   );
 });
-
-function linearTimeEngine():boolean {
-  try {
-    new RegExp("", "l");
-    return true;
-  } catch {
-    return false;
-  }
-}
