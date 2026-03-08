@@ -10,6 +10,25 @@ on:
 permissions: read-all
 
 jobs:
+  benchmark:
+    name: Benchmark
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          cache: npm
+          node-version: 24.0.0
+      - name: Install Just
+        uses: extractions/setup-just@f8a3cce218d9f83db3a2ecd90e41ac3de6cdfd9b # v3.1.0
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Run benchmarks
+        run: just benchmark
   test-bun:
     name: Bun ${{ matrix.bun-version }}
     runs-on: ubuntu-24.04
