@@ -9,7 +9,7 @@ updates:
       interval: daily
       time: "04:00"
     cooldown:
-      default-days: 2
+      default-days: 7
     labels:
       - dependencies
   - package-ecosystem: npm
@@ -19,6 +19,6 @@ updates:
       interval: daily
       time: "04:00"
     cooldown:
-      default-days: 2
+      default-days: 7
     labels:
       - dependencies
