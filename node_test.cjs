@@ -18,6 +18,22 @@
 		}
 	}
 
+	/* --- Type ----------------------------------------------------------------- */
+
+	{ // With new
+		const regexp = new lRegExp("m0NESY");
+		if (!(regexp instanceof RegExp)) {
+			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+	}
+
+	{ // Without new
+		const regexp = lRegExp("NiKo");
+		if (!(regexp instanceof RegExp)) {
+			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+	}
+
 	/* --- Pattern ------------------------------------------------------------ */
 
 	{ // With new
