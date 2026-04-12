@@ -19,6 +19,22 @@ import lRegExp from "./index.js";
 	}
 }
 
+/* --- Type ----------------------------------------------------------------- */
+
+{ // With new
+	const regexp = new lRegExp("donk");
+	if (!(regexp instanceof RegExp)) {
+		throw new Error("an lRegExp is not an instance of RegExp");
+	}
+}
+
+{ // Without new
+	const regexp = lRegExp("ZywOo");
+	if (!(regexp instanceof RegExp)) {
+		throw new Error("an lRegExp is not an instance of RegExp");
+	}
+}
+
 /* --- Pattern -------------------------------------------------------------- */
 
 { // With new
