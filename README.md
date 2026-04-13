@@ -35,7 +35,7 @@ apply).
 
 This library is compatible with Node.js, Deno, Bun, and major browsers. It only
 takes effect in V8-based runtimes (Node.js, Deno, Chromium-based browsers) when
-the experiment linear-time engine is enabled. Otherwise it falls back to the
+the experimental linear-time engine is enabled. Otherwise it falls back to the
 default `RegExp` constructor.
 
 ## Why
@@ -63,9 +63,9 @@ To support users of this package in writing compatible regular expressions we're
 interested in:
 
 - an ESLint plugin to lint regular expressions and raise warnings for the use of
-  regex features not supported by the non-backtracing engine; ([#4])
+  regex features not supported by the non-backtracking engine; ([#4])
 - a tool (CLI/web) to check a given regular expression for compatibility with
-  the non-backtracing engine. ([#21])
+  the non-backtracking engine. ([#21])
 
 [#4]: https://github.com/ericcornelissen/lregexp/issues/4
 [#21]: https://github.com/ericcornelissen/lregexp/issues/21
