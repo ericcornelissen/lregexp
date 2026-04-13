@@ -4,7 +4,7 @@ import { test, expect } from "bun:test";
 
 import lRegExp from "@ericcornelissen/lregexp";
 
-test("Linear engine should handle pathological input", () => {
+test("lRegExp should have no effects", () => {
 	const start = performance.now();
 
 	const regexp = new lRegExp("(a*)*$");
