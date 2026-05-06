@@ -57,7 +57,7 @@ Not all valid JavaScript regular expressions are supported when using the
 `--enable-experimental-regexp-engine` CLI option. This library won't tell you if
 your regular expressions are incompatible, unless you run it with that CLI
 option. If a regular expression is incompatible the constructor will throw a
-SyntaxError.
+[SyntaxError].
 
 To support users of this package in writing compatible regular expressions we're
 interested in:
@@ -69,6 +69,7 @@ interested in:
 
 [#4]: https://github.com/ericcornelissen/lregexp/issues/4
 [#21]: https://github.com/ericcornelissen/lregexp/issues/21
+[syntaxerror]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
 
 ## How
 
