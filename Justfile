@@ -47,8 +47,17 @@ test-node-esm-linear:
 test-node-esm-normal:
 	{{node}} node_test.js
 
+test-node-compatibility: test-node-compatibility-cjs test-node-compatibility-esm
 
-experiment_engine_flag := if `node --version` =~ "v(12|13|14).+" {
+[private]
+test-node-compatibility-cjs:
+	npx nve '9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.cjs
+
+[private]
+test-node-compatibility-esm:
+	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.js
+
+experiment_engine_flag := if `command -v node && node --version || true` =~ "v(12|13|14).+" {
 	""
 } else {
 	"--enable-experimental-regexp-engine"
