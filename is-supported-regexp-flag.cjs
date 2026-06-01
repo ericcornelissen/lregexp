@@ -20,7 +20,7 @@ function isSupportedRegexpFlag(flag) {
 	try {
 		new RegExp("", flag);
 		return true;
-	} catch {
+	} catch (_) {
 		return false;
 	}
 }

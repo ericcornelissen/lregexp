@@ -244,7 +244,7 @@ function linearTimeEngine() {
 	try {
 		new RegExp("", "l");
 		return true;
-	} catch {
+	} catch (_) {
 		return false;
 	}
 }
