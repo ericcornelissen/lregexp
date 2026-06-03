@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import isSupportedRegexpFlag from "./is-supported-regexp-flag.js";
+import isSupportedRegexpFlag from "./is-supported-regexp-flag.cjs";
 
 /**
  * The `RegExp()` constructor creates {@link RegExp} objects.
