@@ -42,10 +42,11 @@ test-node-cjs-normal:
 test-node-esm: test-node-esm-linear test-node-esm-normal
 [private]
 test-node-esm-linear:
-	{{node}} {{experiment_engine_flag}} node_test.js
+	{{if node_has_esm_support == true { node + " " + experiment_engine_flag + " node_test.js" } else { "" }}}
+
 [private]
 test-node-esm-normal:
-	{{node}} node_test.js
+	{{if node_has_esm_support == true { node + " node_test.js" } else { "" }}}
 
 test-node-compatibility: test-node-compatibility-cjs test-node-compatibility-esm
 
@@ -57,10 +58,17 @@ test-node-compatibility-cjs:
 test-node-compatibility-esm:
 	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.js
 
-experiment_engine_flag := if `command -v node && node --version || true` =~ "v(9|10|11|12|13|14).+" {
-	""
-} else {
+true:="true"
+false:="false"
+
+node_version:=`command -v node && node --version || true`
+node_has_esm_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
+node_has_linear_regexp_engine_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
+
+experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 	"--enable-experimental-regexp-engine"
+} else {
+	""
 }
 
 node := if `command -v node || true` =~ ".+" {
