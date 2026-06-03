@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-/**
+/*!
  * MIT License
  *
  * Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
@@ -20,7 +20,7 @@ function isSupportedRegexpFlag(flag) {
 	try {
 		new RegExp("", flag);
 		return true;
-	} catch {
+	} catch (_) {
 		return false;
 	}
 }
