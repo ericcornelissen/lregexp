@@ -42,11 +42,11 @@ test-node-cjs-normal:
 test-node-esm: test-node-esm-linear test-node-esm-normal
 [private]
 test-node-esm-linear:
-	{{if node_has_esm_support == true { node + " " + experiment_engine_flag + " node_test.js" } else { "" }}}
+	{{ if node_has_esm_support == true { node + " " + experiment_engine_flag + " node_test.js" } else { "" } }}
 
 [private]
 test-node-esm-normal:
-	{{if node_has_esm_support == true { node + " node_test.js" } else { "" }}}
+	{{ if node_has_esm_support == true { node + " node_test.js" } else { "" } }}
 
 test-node-compatibility: test-node-compatibility-cjs test-node-compatibility-esm
 
@@ -63,7 +63,7 @@ false:="false"
 
 node_version:=`command -v node && node --version || true`
 node_has_esm_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
-node_has_linear_regexp_engine_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
+node_has_linear_regexp_engine_support:=if node_version =~ "v(9|10|11|12|13|25)\\..+" { false } else { true }
 
 experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 	"--enable-experimental-regexp-engine"
