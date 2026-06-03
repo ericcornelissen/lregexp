@@ -63,7 +63,7 @@ false:="false"
 
 node_version:=`command -v node && node --version || true`
 node_has_esm_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
-node_has_linear_regexp_engine_support:=if node_version =~ "v(9|10|11|12|13|25)\\..+" { false } else { true }
+node_has_linear_regexp_engine_support:=if node_version =~ "v(9|10|11|12|13|14)\\..+" { false } else { true }
 
 experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 	"--enable-experimental-regexp-engine"

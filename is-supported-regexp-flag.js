@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: MIT
-
 /*!
  * MIT License
  *
@@ -12,17 +10,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// The above copyright notice is from npm:is-supported-regexp-flag@2.0.0 (see
-// <https://www.npmjs.com/package/is-supported-regexp-flag>), which only has an
-// ESM version of the code. This file contains a CommonJS version of that.
-
-function isSupportedRegexpFlag(flag) {
+export default function isSupportedRegexpFlag(flag) {
 	try {
-		new RegExp("", flag);
+		new RegExp('', flag); // eslint-disable-line no-new
 		return true;
-	} catch (_) {
+	} catch {
 		return false;
 	}
 }
-
-module.exports = isSupportedRegexpFlag;

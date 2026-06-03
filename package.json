@@ -34,10 +34,8 @@
     "linear",
     "flag"
   ],
-  "dependencies": {
-    "is-supported-regexp-flag": "^2.0.0"
-  },
   "devDependencies": {
+    "is-supported-regexp-flag": "2.0.0",
     "tinybench": "6.0.0"
   }
 }
