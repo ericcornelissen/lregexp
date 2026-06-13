@@ -1,3 +1,6 @@
 # Ignore file for git (https://git-scm.com/docs/gitignore)
 
-node_modules
+mutants/
+node_modules/
+killed.txt
+notkilled.txt
