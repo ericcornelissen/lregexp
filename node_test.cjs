@@ -146,6 +146,12 @@
 		if (got !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
+
+		got = new lRegExp({ flags: "g" }).flags;
+		want = new RegExp({ flags: "g" }).flags;
+		if (got.replace(/l/g, "") !== want) {
+			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+		}
 	}
 
 	{ // With flags
@@ -197,7 +203,7 @@
 	/* --- RegExp.prototype --------------------------------------------------- */
 
 	{ // RegExp.prototype.flags
-		let restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
+		const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 		try {
 			new lRegExp(/irrelevant/);
