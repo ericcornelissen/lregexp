@@ -18,7 +18,8 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:is-supported-regexp-flag@2",
+        "npm:is-supported-regexp-flag@2.0.0",
+        "npm:mock-property@1.1.0",
         "npm:tinybench@6.0.0"
       ]
     }
