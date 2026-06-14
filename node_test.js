@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 
+import mockProperty from "mock-property";
+
 import { time, linearTimeEngine } from "./node_test.cjs";
 
 import lRegExp from "./index.js";
@@ -145,6 +147,12 @@ import lRegExp from "./index.js";
 	if (got !== want) {
 		throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 	}
+
+	got = new lRegExp({ flags: "g" }).flags;
+	want = new RegExp({ flags: "g" }).flags;
+	if (got.replace(/l/g, "") !== want) {
+		throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+	}
 }
 
 { // With flags
@@ -190,5 +198,19 @@ import lRegExp from "./index.js";
 	want = new RegExp(new lRegExp("from lRegExp with flags", "g"), "s").flags;
 	if (got.replace(/l/g, "") !== want) {
 		throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+	}
+}
+
+/* --- RegExp.prototype ----------------------------------------------------- */
+
+{ // RegExp.prototype.flags
+	const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
+
+	try {
+		new lRegExp(/irrelevant/);
+	} catch (_) {
+		throw new Error("unexpected error without RegExp.prototype.flags");
+	} finally {
+		restore();
 	}
 }
