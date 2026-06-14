@@ -43,7 +43,9 @@ To enable the linear-time regular expression engine:
 - **Node.js**: use `node --enable-experimental-regexp-engine entrypoint.js`.
 - **Deno**: use `DENO_V8_FLAGS="--enable-experimental-regexp-engine" deno entrypoint.ts`
 
-## Why
+## Background
+
+### Why
 
 Backtracking regular expressions can take exponential time to evaluate, leading
 to the dreaded _ReDoS_ vulnerability. Linear-time regular expressions avoid this
@@ -56,7 +58,7 @@ library can use the RegExp constructor as usual and benefit from the linear time
 regular expression engine when its users enable it. If they don't, it gracefully
 falls back to the default constructor.
 
-## Caveats
+### Caveats
 
 Not all valid JavaScript regular expressions are supported when using the
 `--enable-experimental-regexp-engine` CLI option. This library won't tell you if
@@ -76,7 +78,7 @@ interested in:
 [#21]: https://github.com/ericcornelissen/lregexp/issues/21
 [syntaxerror]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
 
-## Example
+### Example
 
 A classic example of a ReDoS-vulnerable regular expression is `(a*)*b`. Using
 this with vanilla Node.js on a pathological input string takes some time, test
