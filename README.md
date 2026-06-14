@@ -11,27 +11,16 @@ Transparent linear-time ([non-backtracking]) regular expressions for libraries.
 This package exports a drop-in replacement for the built-in RegExp ([caveats]
 apply).
 
-1. Install
-
-   ```shell
-   npm install @ericcornelissen/lregexp
-   ```
-
-2. Import
-
-   ```javascript
-   import RegExp from "@ericcornelissen/lregexp";
-   ```
-
-3. Use
-
-   ```javascript
-   new RegExp("[linear]{6}");
-   ```
+```javascript
+import RegExp from "@ericcornelissen/lregexp";
+const re = new RegExp("[linear]{6}");
+re.test("is linear time matching possible?");
+// ==> true
+```
 
 [caveats]: #caveats
 
-### Runtimes
+### Support
 
 This package is compatible with Node.js, Deno, Bun, and major browsers. It only
 takes effect in V8-based runtimes (Node.js, Deno, Chromium-based browsers) when
@@ -42,6 +31,81 @@ To enable the linear-time regular expression engine:
 
 - **Node.js**: use `node --enable-experimental-regexp-engine entrypoint.js`
 - **Deno**: use `DENO_V8_FLAGS="--enable-experimental-regexp-engine" deno entrypoint.ts`
+
+### Installation
+
+We recommend different installations methods based on the user. [App developers]
+should add lRegExp as a dependency whereas [library authors] should add it as an
+optional peer dependency.
+
+[app developers]: #for-applications
+[library authors]: #for-libraries
+
+#### For Libraries
+
+We recommend library authors to add lRegExp as an optional peer dependency. This
+lets application developers opt-in to it when they enable the linear time engine
+without bloating the dependency graph of other developers. To do this, run
+
+```shell
+npm install --save-peer '@ericcornelissen/lregexp'
+npm pkg set --json 'peerDependenciesMeta.@ericcornelissen/lregexp.optional=true'
+```
+
+Then, create a local wrapper to import lRegExp with a fallback to RegExp
+
+```javascript
+// filename: regexp.js
+let regexp;
+try {
+  regexp = (await import("@ericcornelissen/lregexp")).default;
+} catch {
+  regexp = RegExp;
+}
+export default regexp;
+```
+
+```javascript
+// filename: regexp.cjs
+let regexp;
+try {
+  regexp = require("@ericcornelissen/lregexp");
+} catch {
+  regexp = RegExp;
+}
+module.exports = regexp;
+```
+
+and import it instead of lRegExp
+
+```diff
+- import RegExp from "@ericcornelissen/lregexp";
++ import RegExp from "./regexp.js";
+```
+
+#### For Applications
+
+Application developers should add lRegExp as a runtime dependency. If you don't
+plan on using it yourself, check if any of your dependencies can use it. To do
+this, run
+
+```shell
+npm ls --all | grep lregexp
+```
+
+and check if the output contains
+
+```log
+UNMET OPTIONAL DEPENDENCY @ericcornelissen/lregexp
+```
+
+if so, install lRegExp as you would any other runtime dependency
+
+```shell
+npm install @ericcornelissen/lregexp
+```
+
+and run your application with the `--enable-experimental-regexp-engine` flag.
 
 ## Background
 
