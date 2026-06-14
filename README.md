@@ -92,3 +92,11 @@ evaluates instantly:
 ```shell
 node -e '/(a*)*b/l.test("aaaaaaaaaaaaaaaaaaaaaaaaac")' --enable-experimental-regexp-engine
 ```
+
+## License
+
+The source code is licensed under the MIT license, see [LICENSE] for the full
+license text. The documentation text is licensed under CC0-1.0; code snippets
+under the MIT-0 license.
+
+[LICENSE]: ./LICENSE
