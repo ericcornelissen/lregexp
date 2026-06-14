@@ -78,13 +78,13 @@ experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 node := if `command -v node || true` =~ ".+" {
 	"node"
 } else {
-	"docker run --rm --entrypoint 'node' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/node:latest"
+	"docker run --rm --entrypoint 'node' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/node:2.0.0"
 }
 
 deno := if `command -v deno || true` =~ ".+" {
 	"deno"
 } else {
-	"docker run --rm --entrypoint 'deno' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' --env DENO_V8_FLAGS docker.io/denoland/deno:latest"
+	"docker run --rm --entrypoint 'deno' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' --env DENO_V8_FLAGS docker.io/denoland/deno:2.0.0"
 }
 
 bun := if `command -v bun || true` =~ ".+" {
