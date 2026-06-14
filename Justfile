@@ -58,6 +58,9 @@ test-node-compatibility-cjs:
 test-node-compatibility-esm:
 	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.js
 
+test-rewrite:
+	node --test --enable-experimental-regexp-engine rewrite_test.js
+
 test-mutation:
 	mutate --mutantDir mutants index.js
 	analyze_mutants --mutantDir mutants index.js "just test-node-esm"
