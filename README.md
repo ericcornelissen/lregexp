@@ -71,12 +71,6 @@ interested in:
 [#21]: https://github.com/ericcornelissen/lregexp/issues/21
 [syntaxerror]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
 
-## How
-
-If `--enable-experimental-regexp-engine` is used, the RegExp constructor from
-this package automatically adds the `l` flag to all regular expressions it
-constructs. If not, the RegExp constructor behavior is unchanged.
-
 ## Example
 
 A classic example of a ReDoS-vulnerable regular expression is `(a*)*b`. Using
