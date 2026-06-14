@@ -38,6 +38,11 @@ takes effect in V8-based runtimes (Node.js, Deno, Chromium-based browsers) when
 the experimental linear-time engine is enabled. Otherwise it falls back to the
 default `RegExp` constructor.
 
+To enable the linear-time regular expression engine:
+
+- **Node.js**: use `node --enable-experimental-regexp-engine entrypoint.js`.
+- **Deno**: use `DENO_V8_FLAGS="--enable-experimental-regexp-engine" deno entrypoint.ts`
+
 ## Why
 
 Backtracking regular expressions can take exponential time to evaluate, leading
