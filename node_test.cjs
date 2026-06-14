@@ -157,44 +157,44 @@
 	{ // With flags
 		let got, want;
 
-		got = new lRegExp("no flags", "s").flags;
-		want = new RegExp("no flags", "s").flags;
+		got = new lRegExp("no flags", "m").flags;
+		want = new RegExp("no flags", "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(/from literal without flags/, "s").flags;
-		want = new RegExp(/from literal without flags/, "s").flags;
+		got = new lRegExp(/from literal without flags/, "m").flags;
+		want = new RegExp(/from literal without flags/, "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(/from literal with flags/g, "s").flags;
-		want = new RegExp(/from literal with flags/g, "s").flags;
+		got = new lRegExp(/from literal with flags/g, "m").flags;
+		want = new RegExp(/from literal with flags/g, "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(new RegExp("from RegExp without flags", "s")).flags;
-		want = new RegExp(new RegExp("from RegExp without flags", "s")).flags;
+		got = new lRegExp(new RegExp("from RegExp without flags", "m")).flags;
+		want = new RegExp(new RegExp("from RegExp without flags", "m")).flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(new RegExp("from RegExp with flags", "g"), "s").flags;
-		want = new RegExp(new RegExp("from RegExp with flags", "g"), "s").flags;
+		got = new lRegExp(new RegExp("from RegExp with flags", "g"), "m").flags;
+		want = new RegExp(new RegExp("from RegExp with flags", "g"), "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(new lRegExp("from lRegExp without flags"), "s").flags;
-		want = new RegExp(new lRegExp("from lRegExp without flags"), "s").flags;
+		got = new lRegExp(new lRegExp("from lRegExp without flags"), "m").flags;
+		want = new RegExp(new lRegExp("from lRegExp without flags"), "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
 
-		got = new lRegExp(new lRegExp("from lRegExp with flags", "g"), "s").flags;
-		want = new RegExp(new lRegExp("from lRegExp with flags", "g"), "s").flags;
+		got = new lRegExp(new lRegExp("from lRegExp with flags", "g"), "m").flags;
+		want = new RegExp(new lRegExp("from lRegExp with flags", "g"), "m").flags;
 		if (got.replace(/l/g, "") !== want) {
 			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
 		}
@@ -252,11 +252,9 @@
 /* -------------------------------------------------------------------------- */
 
 function time(cb) {
-	const { performance } = require("perf_hooks");
-
-	const start = performance.now();
+	const start = Date.now();
 	cb();
-	const end = performance.now();
+	const end = Date.now();
 
 	const duration = end - start;
 	return duration;
