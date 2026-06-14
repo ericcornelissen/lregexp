@@ -95,6 +95,67 @@ evaluates instantly:
 node -e '/(a*)*b/l.test("aaaaaaaaaaaaaaaaaaaaaaaaac")' --enable-experimental-regexp-engine
 ```
 
+## Rewriting
+
+The following are some suggestions for rewriting regular expressions from
+JavaScript's standard engine to the linear-time engine. These suggestions are
+not universally applicable and careful testing is still required.
+
+- Positive lookahead (`(?=...)`) when _replacing_
+
+  Capture the lookahead and restore it (using `$<n>`) when replacing. For
+  example: `replace(/(a(?=b)/, "A")` to `replace(/a(b)/, "A$1")`.
+
+- Negative lookahead (`(?!...)`) when _replacing_
+
+  Capture the lookahead, invert the match, add an end-of-string anchor (`$`),
+  and restore it (using `$<n>`) when replacing. For example:
+  `replace(/(a(?!b)/, "A")` to `replace(/a([^b]|$)/, "A$1")`.
+
+- `i` flag when _testing_
+
+  Write the regular expression to match lowercase strings and convert strings to
+  lowercase (using `.toLowerCase()`) before matching them.
+
+### Testing
+
+We recommend using [differential testing] using [fast-check] when rewriting
+regular expressions. You can use the following test example as a template:
+
+```javascript
+// Run as: node --test --enable-experimental-regexp-engine rewrite_test.js
+
+import { test } from "node:test";
+
+import lRegExp from "@ericcornelissen/lregexp";
+import * as fc from "fast-check";
+
+test("rewritten regular expression", () => {
+  const original = /old regular expression/;
+  const rewritten = new lRegExp(/new regular expression/);
+
+  fc.assert(
+    fc.property(
+      fc.oneof(
+        // any old string, unlikely to match
+        fc.string(), 
+
+        // strings that should match (limited support)
+        fc.stringMatching(original), 
+      ),
+      (s) => original.test(s) === rewritten.test(s)
+    ),
+  );
+});
+
+test("--enable-experimental-regexp-engine", () => {
+  /ensures that the linear engine is enabled/l;
+});
+```
+
+[differential testing]: https://en.wikipedia.org/wiki/Differential_testing
+[fast-check]: https://fast-check.dev/
+
 ## License
 
 The source code is licensed under the MIT license, see [LICENSE] for the full
