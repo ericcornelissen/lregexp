@@ -52,7 +52,7 @@ test-node-compatibility: test-node-compatibility-cjs test-node-compatibility-esm
 
 [private]
 test-node-compatibility-cjs:
-	npx nve '8.0.0,9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.cjs
+	npx nve '7.0.0,8.0.0,9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.cjs
 
 [private]
 test-node-compatibility-esm:
@@ -66,8 +66,8 @@ true:="true"
 false:="false"
 
 node_version:=`command -v node && node --version || true`
-node_has_esm_support:=if node_version =~ "v(8|9|10|11|12|13|14)\\..+" { false } else { true }
-node_has_linear_regexp_engine_support:=if node_version =~ "v(8|9|10|11|12|13|14)\\..+" { false } else { true }
+node_has_esm_support:=if node_version =~ "v(7|8|9|10|11|12|13|14)\\..+" { false } else { true }
+node_has_linear_regexp_engine_support:=if node_version =~ "v(7|8|9|10|11|12|13|14)\\..+" { false } else { true }
 
 experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 	"--enable-experimental-regexp-engine"
@@ -78,13 +78,13 @@ experiment_engine_flag := if node_has_linear_regexp_engine_support == true {
 node := if `command -v node || true` =~ ".+" {
 	"node"
 } else {
-	"docker run --rm --entrypoint 'node' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/node:2.0.0"
+	"docker run --rm --entrypoint 'node' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/node:latest"
 }
 
 deno := if `command -v deno || true` =~ ".+" {
 	"deno"
 } else {
-	"docker run --rm --entrypoint 'deno' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' --env DENO_V8_FLAGS docker.io/denoland/deno:2.0.0"
+	"docker run --rm --entrypoint 'deno' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' --env DENO_V8_FLAGS docker.io/denoland/deno:latest"
 }
 
 bun := if `command -v bun || true` =~ ".+" {
