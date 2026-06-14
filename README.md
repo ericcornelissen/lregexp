@@ -8,7 +8,7 @@ Transparent linear-time ([non-backtracking]) regular expressions for libraries.
 
 ## Usage
 
-This library exports a drop-in replacement for the built-in RegExp ([caveats]
+This package exports a drop-in replacement for the built-in RegExp ([caveats]
 apply).
 
 1. Install
@@ -33,14 +33,14 @@ apply).
 
 ### Runtimes
 
-This library is compatible with Node.js, Deno, Bun, and major browsers. It only
+This package is compatible with Node.js, Deno, Bun, and major browsers. It only
 takes effect in V8-based runtimes (Node.js, Deno, Chromium-based browsers) when
 the experimental linear-time engine is enabled. Otherwise it falls back to the
 default `RegExp` constructor.
 
 To enable the linear-time regular expression engine:
 
-- **Node.js**: use `node --enable-experimental-regexp-engine entrypoint.js`.
+- **Node.js**: use `node --enable-experimental-regexp-engine entrypoint.js`
 - **Deno**: use `DENO_V8_FLAGS="--enable-experimental-regexp-engine" deno entrypoint.ts`
 
 ## Background
@@ -51,9 +51,9 @@ Backtracking regular expressions can take exponential time to evaluate, leading
 to the dreaded _ReDoS_ vulnerability. Linear-time regular expressions avoid this
 by not backtracking.
 
-In Node.js, linear-time regular expressions can be created using the `l` flag
-provided the `--enable-experimental-regexp-engine` CLI option is used. This
-makes it difficult for library authors to tap into. Using this package, a
+In V8-based runtimes, linear-time regular expressions can be created using the
+`l` flag provided the `--enable-experimental-regexp-engine` CLI option is used.
+This makes it difficult for library authors to tap into. Using this package, a
 library can use the RegExp constructor as usual and benefit from the linear time
 regular expression engine when its users enable it. If they don't, it gracefully
 falls back to the default constructor.
@@ -61,9 +61,9 @@ falls back to the default constructor.
 ### Caveats
 
 Not all valid JavaScript regular expressions are supported when using the
-`--enable-experimental-regexp-engine` CLI option. This library won't tell you if
+`--enable-experimental-regexp-engine` CLI option. This package won't tell you if
 your regular expressions are incompatible, unless you run it with that CLI
-option. If a regular expression is incompatible the constructor will throw a
+option. If a regular expression is incompatible, the constructor will throw a
 [SyntaxError].
 
 To support users of this package in writing compatible regular expressions we're
@@ -81,8 +81,8 @@ interested in:
 ### Example
 
 A classic example of a ReDoS-vulnerable regular expression is `(a*)*b`. Using
-this with vanilla Node.js on a pathological input string takes some time, test
-it for yourself with (add an `a` and the runtime doubles):
+this with vanilla Node.js on a pathological input string takes quite some time,
+test it for yourself with (add an `a` and the runtime doubles):
 
 ```shell
 node -e '/(a*)*b/.test("aaaaaaaaaaaaaaaaaaaaaaaaac")'
