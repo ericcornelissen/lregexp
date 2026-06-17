@@ -32,16 +32,45 @@
 	/* --- Type ----------------------------------------------------------------- */
 
 	{ // With new
-		var regexp = new lRegExp("m0NESY");
+		var regexp;
+
+		regexp = new lRegExp("m0NESY");
 		if (!(regexp instanceof RegExp)) {
 			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+
+		regexp = new lRegExp("s1mple");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("an lRegExp is not an instance of lRegExp");
+		}
+
+		regexp = new RegExp("b1t");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp is not an instance of lRegExp");
 		}
 	}
 
 	{ // Without new
-		var regexp = lRegExp("NiKo");
+		var regexp;
+
+		regexp = lRegExp("NiKo");
 		if (!(regexp instanceof RegExp)) {
 			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+
+		regexp = lRegExp("dev1ce");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("an lRegExp is not an instance of lRegExp");
+		}
+
+		regexp = RegExp("ScreaM");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp is not an instance of lRegExp");
+		}
+
+		regexp = /GuardiaN/;
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp literal is not an instance of lRegExp");
 		}
 	}
 
