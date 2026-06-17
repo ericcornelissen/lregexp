@@ -105,6 +105,28 @@
 
 	/* --- Flags -------------------------------------------------------------- */
 
+	{ // 'l' flag
+		var regexp = new lRegExp("might or might not have the 'l' flag and linear property");
+
+		if (linearTimeEngine()) {
+			if (!flags(regexp).includes("l")) {
+				throw new Error("Instance of lRegExp is missing the 'l' flag");
+			}
+
+			if (!regexp.linear) {
+				throw new Error("Instance of lRegExp is missing the 'linear' property");
+			}
+		} else {
+			if (flags(regexp).includes("l")) {
+				throw new Error("Instance of lRegExp unexpectedly has the 'l' flag");
+			}
+
+			if (regexp.linear) {
+				throw new Error("Instance of lRegExp unexpectedly has the 'linear' property");
+			}
+		}
+	}
+
 	{ // Without flags
 		var got, want;
 

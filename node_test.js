@@ -97,6 +97,28 @@ import lRegExp from "./index.js";
 
 /* --- Flags ---------------------------------------------------------------- */
 
+{ // 'l' flag
+	const regexp = new lRegExp("might or might not have the 'l' flag and linear property");
+
+	if (linearTimeEngine()) {
+		if (!regexp.flags.includes("l")) {
+			throw new Error("Instance of lRegExp is missing the 'l' flag");
+		}
+
+		if (!regexp.linear) {
+			throw new Error("Instance of lRegExp is missing the 'linear' property");
+		}
+	} else {
+		if (regexp.flags.includes("l")) {
+			throw new Error("Instance of lRegExp unexpectedly has the 'l' flag");
+		}
+
+		if (regexp.linear) {
+			throw new Error("Instance of lRegExp unexpectedly has the 'linear' property");
+		}
+	}
+}
+
 { // Without flags
 	let got, want;
 
