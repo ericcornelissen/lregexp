@@ -23,16 +23,30 @@
 	/* --- Type ----------------------------------------------------------------- */
 
 	{ // With new
-		const regexp = new lRegExp("m0NESY");
+		let regexp;
+
+		regexp = new lRegExp("m0NESY");
 		if (!(regexp instanceof RegExp)) {
 			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+
+		regexp = new lRegExp("s1mple");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("an lRegExp is not an instance of lRegExp");
 		}
 	}
 
 	{ // Without new
-		const regexp = lRegExp("NiKo");
+		let regexp;
+
+		regexp = lRegExp("NiKo");
 		if (!(regexp instanceof RegExp)) {
 			throw new Error("an lRegExp is not an instance of RegExp");
+		}
+
+		regexp = lRegExp("dev1ce");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("an lRegExp is not an instance of lRegExp");
 		}
 	}
 
