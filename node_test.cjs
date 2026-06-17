@@ -371,11 +371,12 @@ module.exports = { time, linearTimeEngine };
 
 function flags(regexp) {
 	var flags = "";
-	if (regexp.hasIndices) flags += "d";
-	if (regexp.global) flags += "g";
-	if (regexp.ignoreCase) flags += "i";
-	if (regexp.multiline) flags += "m";
 	if (regexp.dotAll) flags += "s";
+	if (regexp.global) flags += "g";
+	if (regexp.hasIndices) flags += "d";
+	if (regexp.ignoreCase) flags += "i";
+	if (regexp.linear) flags += "l";
+	if (regexp.multiline) flags += "m";
 	if (regexp.unicode) flags += "u";
 	if (regexp.unicodeSets) flags += "v";
 	if (regexp.sticky) flags += "y";
