@@ -24,16 +24,45 @@ import lRegExp from "./index.js";
 /* --- Type ----------------------------------------------------------------- */
 
 { // With new
-	const regexp = new lRegExp("donk");
+	let regexp;
+
+	regexp = new lRegExp("donk");
 	if (!(regexp instanceof RegExp)) {
 		throw new Error("an lRegExp is not an instance of RegExp");
+	}
+
+	regexp = new lRegExp("GeT_RiGhT");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("an lRegExp is not an instance of lRegExp");
+	}
+
+	regexp = new RegExp("w0nderful");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp is not an instance of lRegExp");
 	}
 }
 
 { // Without new
-	const regexp = lRegExp("ZywOo");
+	let regexp;
+
+	regexp = lRegExp("ZywOo");
 	if (!(regexp instanceof RegExp)) {
 		throw new Error("an lRegExp is not an instance of RegExp");
+	}
+
+	regexp = lRegExp("F0rest");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("an lRegExp is not an instance of lRegExp");
+	}
+
+	regexp = RegExp("ropz");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp is not an instance of lRegExp");
+	}
+
+	regexp = /kennyS/;
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp literal is not an instance of lRegExp");
 	}
 }
 
