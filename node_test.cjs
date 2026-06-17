@@ -222,7 +222,7 @@
 	/* --- RegExp.prototype --------------------------------------------------- */
 
 	{ // RegExp.prototype.flags
-		var restore = mockProperty(RegExp.prototype, "flags", { "devare": true });
+		var restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 		try {
 			new lRegExp(/irrelevant/);
