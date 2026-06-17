@@ -21,8 +21,10 @@ if (isSupportedRegexpFlag("l")) {
 			}
 		}
 
-		return new RegExp(pattern, `${flags}l`);
+    return new RegExp(pattern, `${flags}l`);
 	};
+
+	lRegExp.prototype = RegExp.prototype;
 }
 
 module.exports = lRegExp;
