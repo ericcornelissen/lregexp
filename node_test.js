@@ -201,6 +201,33 @@ import lRegExp from "./index.js";
 	}
 }
 
+/* --- Instance properties -------------------------------------------------- */
+
+{
+	const model = /foobar/g;
+	const real = new lRegExp("foobar", "g");
+
+	for (const prop of Object.getOwnPropertyNames(model)) {
+		const got = real[prop];
+		const want = model[prop];
+		if (got !== want) {
+			throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+		}
+	}
+
+	for (const prop of Object.getOwnPropertyNames(RegExp.prototype)) {
+		if (prop === "flags" || prop === "linear") {
+			continue; // Tested separately
+		}
+
+		const got = real[prop];
+		const want = model[prop];
+		if (got !== want) {
+			throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+		}
+	}
+}
+
 /* --- RegExp.prototype ----------------------------------------------------- */
 
 { // RegExp.prototype.flags
