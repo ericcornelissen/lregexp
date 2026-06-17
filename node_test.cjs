@@ -297,9 +297,9 @@
 		}
 	}
 
-	/* --- RegExp.prototype --------------------------------------------------- */
+	/* --- Edge cases --------------------------------------------------------- */
 
-	{ // RegExp.prototype.flags
+	{ // no RegExp.prototype.flags
 		var restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 		try {
@@ -308,6 +308,40 @@
 			throw new Error("unexpected error without RegExp.prototype.flags");
 		} finally {
 			restore();
+		}
+	}
+
+	{ // Unconventional pattern values
+		var values = [
+			null,
+			undefined,
+			42,
+			3.14,
+			[],
+			{},
+    ];
+
+		for (var value of values) {
+			var got, want;
+
+			try {
+				new lRegExp(value);
+				got = false;
+			} catch (_) {
+				got = true;
+			}
+
+			try {
+				new RegExp(value);
+				want = false;
+			} catch (_) {
+				want = true;
+			}
+
+			if (got != want) {
+				var result = got ? "failed" : "succeeded";
+				throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+			}
 		}
 	}
 }
@@ -367,8 +401,6 @@ function linearTimeEngine() {
 	}
 }
 
-module.exports = { time, linearTimeEngine };
-
 function flags(regexp) {
 	var flags = "";
 	if (regexp.dotAll) flags += "s";
@@ -382,3 +414,5 @@ function flags(regexp) {
 	if (regexp.sticky) flags += "y";
 	return flags;
 }
+
+module.exports = { time, linearTimeEngine };

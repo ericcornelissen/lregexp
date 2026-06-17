@@ -279,16 +279,51 @@ import lRegExp from "./index.js";
 	}
 }
 
-/* --- RegExp.prototype ----------------------------------------------------- */
+/* --- Edge cases ----------------------------------------------------------- */
 
-{ // RegExp.prototype.flags
+{ // no RegExp.prototype.flags
 	const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 	try {
 		new lRegExp(/irrelevant/);
-	} catch (_) {
+	} catch {
 		throw new Error("unexpected error without RegExp.prototype.flags");
 	} finally {
 		restore();
+	}
+}
+
+{ // Unconventional pattern values
+	const values = [
+		null,
+		undefined,
+		42,
+		3.14,
+		9001n,
+		[],
+		{},
+	];
+
+	for (const value of values) {
+		let got, want;
+
+		try {
+			new lRegExp(value);
+			got = false;
+		} catch {
+			got = true;
+		}
+
+		try {
+			new RegExp(value);
+			want = false;
+		} catch {
+			want = true;
+		}
+
+		if (got != want) {
+			const result = got ? "failed" : "succeeded";
+			throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+		}
 	}
 }
