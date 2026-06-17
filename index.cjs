@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-const isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
+var isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
 
 /**
  * The `RegExp()` constructor creates {@link RegExp} objects.
@@ -10,7 +10,7 @@ const isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
  * @returns {RegExp} A {@link RegExp} object constructed from `pattern` and `flags`.
  * @throws {SyntaxError} Thrown in one of the following cases: `pattern` cannot be parsed as a valid regular expression, or `flags` contains repeated characters or any character outside of those allowed.
  */
-let lRegExp = RegExp;
+var lRegExp = RegExp;
 
 if (isSupportedRegexpFlag("l")) {
 	lRegExp = function(pattern, flags) {
