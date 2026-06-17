@@ -35,6 +35,11 @@ import lRegExp from "./index.js";
 	if (!(regexp instanceof lRegExp)) {
 		throw new Error("an lRegExp is not an instance of lRegExp");
 	}
+
+	regexp = new RegExp("w0nderful");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp is not an instance of lRegExp");
+	}
 }
 
 { // Without new
@@ -48,6 +53,16 @@ import lRegExp from "./index.js";
 	regexp = lRegExp("F0rest");
 	if (!(regexp instanceof lRegExp)) {
 		throw new Error("an lRegExp is not an instance of lRegExp");
+	}
+
+	regexp = RegExp("ropz");
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp is not an instance of lRegExp");
+	}
+
+	regexp = /kennyS/;
+	if (!(regexp instanceof lRegExp)) {
+		throw new Error("a RegExp literal is not an instance of lRegExp");
 	}
 }
 

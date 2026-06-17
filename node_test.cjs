@@ -34,6 +34,11 @@
 		if (!(regexp instanceof lRegExp)) {
 			throw new Error("an lRegExp is not an instance of lRegExp");
 		}
+
+		regexp = new RegExp("b1t");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp is not an instance of lRegExp");
+		}
 	}
 
 	{ // Without new
@@ -47,6 +52,16 @@
 		regexp = lRegExp("dev1ce");
 		if (!(regexp instanceof lRegExp)) {
 			throw new Error("an lRegExp is not an instance of lRegExp");
+		}
+
+		regexp = RegExp("ScreaM");
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp is not an instance of lRegExp");
+		}
+
+		regexp = /GuardiaN/;
+		if (!(regexp instanceof lRegExp)) {
+			throw new Error("a RegExp literal is not an instance of lRegExp");
 		}
 	}
 
