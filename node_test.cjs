@@ -270,6 +270,21 @@
 		}
 	}
 
+	/* --- Class properties -------------------------------------------------- */
+
+	{
+		const model = RegExp;
+		const real = lRegExp;
+
+		for (const prop of Object.getOwnPropertyNames(model)) {
+			const got = real[prop];
+			const want = model[prop];
+			if (got !== want) {
+				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+			}
+		}
+	}
+
 	/* --- Instance properties ------------------------------------------------ */
 
 	{
@@ -319,7 +334,7 @@
 			3.14,
 			[],
 			{},
-    ];
+		];
 
 		for (var value of values) {
 			var got, want;
