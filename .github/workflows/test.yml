@@ -132,4 +132,8 @@ jobs:
       - name: Run mutation tests
         run: |
           just test-mutation
+
+          echo 'cat notkilled.txt'
+          cat notkilled.txt
+
           [ -s notkilled.txt ] && exit 1
