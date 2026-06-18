@@ -9,9 +9,9 @@ import lRegExp from "./index.js";
 /* --- Duration ------------------------------------------------------------- */
 
 {
-	const duration = time(() => {
+	const duration = time(function () {
 		const regexp = new lRegExp("(a*)*$");
-		regexp.test("a".repeat(20)+"b");
+		regexp.test("aaaaaaaaaaaaaaaaaaaab");
 	});
 
 	if (linearTimeEngine() && duration > 1) {
