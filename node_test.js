@@ -296,17 +296,17 @@ import lRegExp from "./index.js";
 
 /* --- Edge cases ----------------------------------------------------------- */
 
-// { // no RegExp.prototype.flags
-// 	const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
+{ // no RegExp.prototype.flags
+	const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
-// 	try {
-// 		new lRegExp(/irrelevant/);
-// 	} catch {
-// 		throw new Error("unexpected error without RegExp.prototype.flags");
-// 	} finally {
-// 		restore();
-// 	}
-// }
+	try {
+		new lRegExp(/irrelevant/);
+	} catch {
+		throw new Error("unexpected error without RegExp.prototype.flags");
+	} finally {
+		restore();
+	}
+}
 
 { // Unconventional pattern values
 	const values = [
