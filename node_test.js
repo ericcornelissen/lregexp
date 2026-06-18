@@ -126,6 +126,28 @@ import lRegExp from "./index.js";
 
 /* --- Flags ---------------------------------------------------------------- */
 
+{ // 'l' flag
+	const regexp = new lRegExp("might or might not have the 'l' flag and linear property");
+
+	if (linearTimeEngine()) {
+		if (!regexp.flags.includes("l")) {
+			throw new Error("Instance of lRegExp is missing the 'l' flag");
+		}
+
+		if (!regexp.linear) {
+			throw new Error("Instance of lRegExp is missing the 'linear' property");
+		}
+	} else {
+		if (regexp.flags.includes("l")) {
+			throw new Error("Instance of lRegExp unexpectedly has the 'l' flag");
+		}
+
+		if (regexp.linear) {
+			throw new Error("Instance of lRegExp unexpectedly has the 'linear' property");
+		}
+	}
+}
+
 { // Without flags
 	let got, want;
 
@@ -230,16 +252,93 @@ import lRegExp from "./index.js";
 	}
 }
 
-/* --- RegExp.prototype ----------------------------------------------------- */
+/* --- Class properties -------------------------------------------------- */
 
-{ // RegExp.prototype.flags
+{
+	const model = RegExp;
+	const real = lRegExp;
+
+	for (const prop of Object.getOwnPropertyNames(model)) {
+		const got = real[prop];
+		const want = model[prop];
+		if (got !== want) {
+			throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+		}
+	}
+}
+
+/* --- Instance properties -------------------------------------------------- */
+
+{
+	const model = /foobar/g;
+	const real = new lRegExp("foobar", "g");
+
+	for (const prop of Object.getOwnPropertyNames(model)) {
+		const got = real[prop];
+		const want = model[prop];
+		if (got !== want) {
+			throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+		}
+	}
+
+	for (const prop of Object.getOwnPropertyNames(RegExp.prototype)) {
+		if (prop === "flags" || prop === "linear") {
+			continue; // Tested separately
+		}
+
+		const got = real[prop];
+		const want = model[prop];
+		if (got !== want) {
+			throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+		}
+	}
+}
+
+/* --- Edge cases ----------------------------------------------------------- */
+
+{ // no RegExp.prototype.flags
 	const restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 	try {
 		new lRegExp(/irrelevant/);
-	} catch (_) {
+	} catch {
 		throw new Error("unexpected error without RegExp.prototype.flags");
 	} finally {
 		restore();
+	}
+}
+
+{ // Unconventional pattern values
+	const values = [
+		null,
+		undefined,
+		42,
+		3.14,
+		9001n,
+		[],
+		{},
+	];
+
+	for (const value of values) {
+		let got, want;
+
+		try {
+			new lRegExp(value);
+			got = false;
+		} catch {
+			got = true;
+		}
+
+		try {
+			new RegExp(value);
+			want = false;
+		} catch {
+			want = true;
+		}
+
+		if (got != want) {
+			const result = got ? "failed" : "succeeded";
+			throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+		}
 	}
 }

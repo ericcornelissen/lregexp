@@ -13,7 +13,8 @@ var isSupportedRegexpFlag = require("./is-supported-regexp-flag.cjs");
 var lRegExp = RegExp;
 
 if (isSupportedRegexpFlag("l")) {
-	lRegExp = function(pattern, flags) {
+	var _RegExp = RegExp;
+	lRegExp = function RegExp(pattern, flags) {
 		if (flags === undefined) {
 			flags = "";
 			if (pattern instanceof RegExp && pattern.flags) {
@@ -21,10 +22,11 @@ if (isSupportedRegexpFlag("l")) {
 			}
 		}
 
-		return new RegExp(pattern, `${flags}l`);
+		return new _RegExp(pattern, `${flags}l`);
 	};
 
 	lRegExp.prototype = RegExp.prototype;
+	Object.setPrototypeOf(lRegExp, RegExp);
 }
 
 module.exports = lRegExp;

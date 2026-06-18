@@ -134,6 +134,28 @@
 
 	/* --- Flags -------------------------------------------------------------- */
 
+	{ // 'l' flag
+		var regexp = new lRegExp("might or might not have the 'l' flag and linear property");
+
+		if (linearTimeEngine()) {
+			if (!flags(regexp).includes("l")) {
+				throw new Error("Instance of lRegExp is missing the 'l' flag");
+			}
+
+			if (!regexp.linear) {
+				throw new Error("Instance of lRegExp is missing the 'linear' property");
+			}
+		} else {
+			if (flags(regexp).includes("l")) {
+				throw new Error("Instance of lRegExp unexpectedly has the 'l' flag");
+			}
+
+			if (regexp.linear) {
+				throw new Error("Instance of lRegExp unexpectedly has the 'linear' property");
+			}
+		}
+	}
+
 	{ // Without flags
 		var got, want;
 
@@ -248,9 +270,51 @@
 		}
 	}
 
-	/* --- RegExp.prototype --------------------------------------------------- */
+	/* --- Class properties -------------------------------------------------- */
 
-	{ // RegExp.prototype.flags
+	{
+		var model = RegExp;
+		var real = lRegExp;
+
+		for (var prop of Object.getOwnPropertyNames(model)) {
+			var got = real[prop];
+			var want = model[prop];
+			if (got !== want) {
+				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+			}
+		}
+	}
+
+	/* --- Instance properties ------------------------------------------------ */
+
+	{
+		var model = /foobar/g;
+		var real = new lRegExp("foobar", "g");
+
+		for (var prop of Object.getOwnPropertyNames(model)) {
+			var got = real[prop];
+			var want = model[prop];
+			if (got !== want) {
+				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+			}
+		}
+
+		for (var prop of Object.getOwnPropertyNames(RegExp.prototype)) {
+			if (prop === "flags" || prop === "linear") {
+				continue; // Tested separately
+			}
+
+			var got = real[prop];
+			var want = model[prop];
+			if (got !== want) {
+				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+			}
+		}
+	}
+
+	/* --- Edge cases --------------------------------------------------------- */
+
+	{ // no RegExp.prototype.flags
 		var restore = mockProperty(RegExp.prototype, "flags", { "delete": true });
 
 		try {
@@ -259,6 +323,40 @@
 			throw new Error("unexpected error without RegExp.prototype.flags");
 		} finally {
 			restore();
+		}
+	}
+
+	{ // Unconventional pattern values
+		var values = [
+			null,
+			undefined,
+			42,
+			3.14,
+			[],
+			{},
+		];
+
+		for (var value of values) {
+			var got, want;
+
+			try {
+				new lRegExp(value);
+				got = false;
+			} catch (_) {
+				got = true;
+			}
+
+			try {
+				new RegExp(value);
+				want = false;
+			} catch (_) {
+				want = true;
+			}
+
+			if (got != want) {
+				var result = got ? "failed" : "succeeded";
+				throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+			}
 		}
 	}
 }
@@ -318,17 +416,18 @@ function linearTimeEngine() {
 	}
 }
 
-module.exports = { time, linearTimeEngine };
-
 function flags(regexp) {
 	var flags = "";
-	if (regexp.hasIndices) flags += "d";
-	if (regexp.global) flags += "g";
-	if (regexp.ignoreCase) flags += "i";
-	if (regexp.multiline) flags += "m";
 	if (regexp.dotAll) flags += "s";
+	if (regexp.global) flags += "g";
+	if (regexp.hasIndices) flags += "d";
+	if (regexp.ignoreCase) flags += "i";
+	if (regexp.linear) flags += "l";
+	if (regexp.multiline) flags += "m";
 	if (regexp.unicode) flags += "u";
 	if (regexp.unicodeSets) flags += "v";
 	if (regexp.sticky) flags += "y";
 	return flags;
 }
+
+module.exports = { time, linearTimeEngine };
