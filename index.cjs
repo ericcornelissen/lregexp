@@ -22,7 +22,7 @@ if (isSupportedRegexpFlag("l")) {
 			}
 		}
 
-		return new _RegExp(pattern, `${flags}l`);
+		return new _RegExp(pattern, flags + "l");
 	};
 
 	lRegExp.prototype = RegExp.prototype;

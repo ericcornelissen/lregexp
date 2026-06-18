@@ -17,15 +17,15 @@
 	/* --- Duration ----------------------------------------------------------- */
 
 	{
-		var duration = time(() => {
+		var duration = time(function () {
 			var regexp = new lRegExp("(a*)*$");
-			regexp.test("a".repeat(20) + "b");
+			regexp.test("aaaaaaaaaaaaaaaaaaaab");
 		});
 
 		if (linearTimeEngine() && duration > 1) {
-			throw new Error(`matched unexpectedly slow (${duration}ms) with experimental regexp engine`);
+			throw new Error("matched unexpectedly slow (" + duration + "ms) with experimental regexp engine");
 		} else if (!linearTimeEngine() && duration < 1) {
-			throw new Error(`matched unexpectedly fast (${duration}ms) with default regexp engine`);
+			throw new Error("matched unexpectedly fast (" + duration + "ms) with default regexp engine");
 		}
 	}
 
@@ -82,25 +82,25 @@
 		got = new lRegExp("from string pattern").source;
 		want = new RegExp("from string pattern").source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = new lRegExp(/from literal pattern/).source;
 		want = new RegExp(/from literal pattern/).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = new lRegExp(new RegExp("from RegExp pattern")).source;
 		want = new RegExp(new RegExp("from RegExp pattern")).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = new lRegExp(new lRegExp("from lRegExp pattern")).source;
 		want = new RegExp(new lRegExp("from lRegExp pattern")).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 	}
 
@@ -110,25 +110,25 @@
 		got = lRegExp("from string pattern").source;
 		want = RegExp("from string pattern").source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = lRegExp(/from literal pattern/).source;
 		want = RegExp(/from literal pattern/).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = lRegExp(new RegExp("from RegExp pattern")).source;
 		want = RegExp(new RegExp("from RegExp pattern")).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 
 		got = lRegExp(new lRegExp("from lRegExp pattern")).source;
 		want = RegExp(new lRegExp("from lRegExp pattern")).source;
 		if (got !== want) {
-			throw new Error(`unexpected pattern (got "${got}", want "${want}")`);
+			throw new Error("unexpected pattern (got '" + got + "', want '" + want + "')");
 		}
 	}
 
@@ -138,7 +138,7 @@
 		var regexp = new lRegExp("might or might not have the 'l' flag and linear property");
 
 		if (linearTimeEngine()) {
-			if (!flags(regexp).includes("l")) {
+			if (flags(regexp).indexOf("l") === -1) {
 				throw new Error("Instance of lRegExp is missing the 'l' flag");
 			}
 
@@ -146,7 +146,7 @@
 				throw new Error("Instance of lRegExp is missing the 'linear' property");
 			}
 		} else {
-			if (flags(regexp).includes("l")) {
+			if (flags(regexp).indexOf("l") !== -1) {
 				throw new Error("Instance of lRegExp unexpectedly has the 'l' flag");
 			}
 
@@ -162,55 +162,55 @@
 		got = flags(new lRegExp("no flags"));
 		want = flags(new RegExp("no flags"));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp("explicit undefined flags", undefined));
 		want = flags(new RegExp("explicit undefined flags", undefined));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(/from literal without flags/));
 		want = flags(new RegExp(/from literal without flags/));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(/from literal with flags/g));
 		want = flags(new RegExp(/from literal with flags/g));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(new RegExp("from RegExp without flags")));
 		want = flags(new RegExp(new RegExp("from RegExp without flags")));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(new RegExp("from RegExp with flags", "g")));
 		want = flags(new RegExp(new RegExp("from RegExp with flags", "g")));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(new lRegExp("from lRegExp with flags", "g")));
 		want = flags(new RegExp(new lRegExp("from lRegExp with flags", "g")));
 		if (got !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp(new lRegExp("from lRegExp without flags")));
 		want = flags(new RegExp(new lRegExp("from lRegExp without flags")));
 		if (got !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		got = flags(new lRegExp({ flags: "g" }));
 		want = flags(new RegExp({ flags: "g" }));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 	}
 
@@ -220,14 +220,14 @@
 		got = flags(new lRegExp("no flags", "m"));
 		want = flags(new RegExp("no flags", "m"));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		if (canSupplyFlagsWhenConstructingRegExpFromAnother) {
 			got = flags(new lRegExp(/from literal without flags/, "m"));
 			want = flags(new RegExp(/from literal without flags/, "m"));
 			if (got.replace(/l/g, "") !== want) {
-				throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+				throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 			}
 		}
 
@@ -235,21 +235,21 @@
 			got = flags(new lRegExp(/from literal with flags/g, "m"));
 			want = flags(new RegExp(/from literal with flags/g, "m"));
 			if (got.replace(/l/g, "") !== want) {
-				throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+				throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 			}
 		}
 
 		got = flags(new lRegExp(new RegExp("from RegExp without flags", "m")));
 		want = flags(new RegExp(new RegExp("from RegExp without flags", "m")));
 		if (got.replace(/l/g, "") !== want) {
-			throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+			throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 		}
 
 		if (canSupplyFlagsWhenConstructingRegExpFromAnother) {
 			got = flags(new lRegExp(new RegExp("from RegExp with flags", "g"), "m"));
 			want = flags(new RegExp(new RegExp("from RegExp with flags", "g"), "m"));
 			if (got.replace(/l/g, "") !== want) {
-				throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+				throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 			}
 		}
 
@@ -257,7 +257,7 @@
 			got = flags(new lRegExp(new lRegExp("from lRegExp without flags"), "m"));
 			want = flags(new RegExp(new lRegExp("from lRegExp without flags"), "m"));
 			if (got.replace(/l/g, "") !== want) {
-				throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+				throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 			}
 		}
 
@@ -265,7 +265,7 @@
 			got = flags(new lRegExp(new lRegExp("from lRegExp with flags", "g"), "m"));
 			want = flags(new RegExp(new lRegExp("from lRegExp with flags", "g"), "m"));
 			if (got.replace(/l/g, "") !== want) {
-				throw new Error(`unexpected flags (got "${got}", want "${want}")`);
+				throw new Error("unexpected flags (got '" + got + "', want '" + want + "')");
 			}
 		}
 	}
@@ -280,7 +280,7 @@
 			var got = real[prop];
 			var want = model[prop];
 			if (got !== want) {
-				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+				throw new Error("value mismatch for property '" + prop + "' (got '" + got + "', want '" + want + "')");
 			}
 		}
 	}
@@ -295,7 +295,7 @@
 			var got = real[prop];
 			var want = model[prop];
 			if (got !== want) {
-				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+				throw new Error("value mismatch for property '" + prop + "' (got '" + got + "', want '" + want + "')");
 			}
 		}
 
@@ -307,7 +307,7 @@
 			var got = real[prop];
 			var want = model[prop];
 			if (got !== want) {
-				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
+				throw new Error("value mismatch for property '" + prop + "' (got '" + got + "', want '" + want + "')");
 			}
 		}
 	}
@@ -355,7 +355,7 @@
 
 			if (got != want) {
 				var result = got ? "failed" : "succeeded";
-				throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+				throw new Error("Unexpectedly " + result + " with " + value + " as pattern");
 			}
 		}
 	}
@@ -430,4 +430,5 @@ function flags(regexp) {
 	return flags;
 }
 
-module.exports = { time, linearTimeEngine };
+module.exports.linearTimeEngine = linearTimeEngine;
+module.exports.time = time;
