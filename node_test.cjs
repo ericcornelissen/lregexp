@@ -273,12 +273,12 @@
 	/* --- Class properties -------------------------------------------------- */
 
 	{
-		const model = RegExp;
-		const real = lRegExp;
+		var model = RegExp;
+		var real = lRegExp;
 
-		for (const prop of Object.getOwnPropertyNames(model)) {
-			const got = real[prop];
-			const want = model[prop];
+		for (var prop of Object.getOwnPropertyNames(model)) {
+			var got = real[prop];
+			var want = model[prop];
 			if (got !== want) {
 				throw new Error(`value mismatch for property '${prop}' (got "${got}", want "${want}")`);
 			}
