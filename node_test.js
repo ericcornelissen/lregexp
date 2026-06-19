@@ -342,3 +342,38 @@ import lRegExp from "./index.js";
 		}
 	}
 }
+
+{ // Unconventional flag values
+	const values = [
+		null,
+		undefined,
+		42,
+		3.14,
+		9001n,
+		[],
+		{},
+	];
+
+	for (const value of values) {
+		let got, want;
+
+		try {
+			new lRegExp("irrelevant", value);
+			got = false;
+		} catch {
+			got = true;
+		}
+
+		try {
+			new RegExp("irrelevant", value);
+			want = false;
+		} catch {
+			want = true;
+		}
+
+		if (got != want) {
+			const result = got ? "failed" : "succeeded";
+			throw new Error(`Unexpectedly ${result} with ${value} as pattern`);
+		}
+	}
+}
