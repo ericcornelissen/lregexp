@@ -276,7 +276,9 @@
 		var model = RegExp;
 		var real = lRegExp;
 
-		for (var prop of Object.getOwnPropertyNames(model)) {
+		var properties = Object.getOwnPropertyNames(model);
+		for (var i = 0; i < properties.length; i++) {
+			var prop = properties[i];
 			var got = real[prop];
 			var want = model[prop];
 			if (got !== want) {
@@ -288,10 +290,14 @@
 	/* --- Instance properties ------------------------------------------------ */
 
 	{
+		var properties;
+
 		var model = /foobar/g;
 		var real = new lRegExp("foobar", "g");
 
-		for (var prop of Object.getOwnPropertyNames(model)) {
+		properties = Object.getOwnPropertyNames(model);
+		for (var i = 0; i < properties.length; i++) {
+			var prop = properties[i];
 			var got = real[prop];
 			var want = model[prop];
 			if (got !== want) {
@@ -299,7 +305,9 @@
 			}
 		}
 
-		for (var prop of Object.getOwnPropertyNames(RegExp.prototype)) {
+		properties = Object.getOwnPropertyNames(RegExp.prototype);
+		for (var i = 0; i < properties.length; i++) {
+			var prop = properties[i];
 			if (prop === "flags" || prop === "linear") {
 				continue; // Tested separately
 			}
@@ -336,7 +344,8 @@
 			{},
 		];
 
-		for (var value of values) {
+		for (var i = 0; i < values.length; i++) {
+			var value = values[i];
 			var got, want;
 
 			try {
