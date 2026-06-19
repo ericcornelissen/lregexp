@@ -368,6 +368,41 @@
 			}
 		}
 	}
+
+	{ // Unconventional flag values
+		var values = [
+			null,
+			undefined,
+			42,
+			3.14,
+			[],
+			{},
+		];
+
+		for (var i = 0; i < values.length; i++) {
+			var value = values[i];
+			var got, want;
+
+			try {
+				new lRegExp("irrelevant", value);
+				got = false;
+			} catch (_) {
+				got = true;
+			}
+
+			try {
+				new RegExp("irrelevant", value);
+				want = false;
+			} catch (_) {
+				want = true;
+			}
+
+			if (got != want) {
+				var result = got ? "failed" : "succeeded";
+				throw new Error("Unexpectedly " + result + " with " + value + " as pattern");
+			}
+		}
+	}
 }
 
 /* -------------------------------------------------------------------------- */
