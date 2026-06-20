@@ -21,7 +21,7 @@
   "engines": {
     "bun": ">=1.0.0 <2",
     "deno": "^1.40.0 || ^2.0.0",
-    "node": ">=0.9.1 <27"
+    "node": "^0.8.6 || >=0.9.1 <27"
   },
   "author": {
     "name": "Eric Cornelissen",
