@@ -18,8 +18,14 @@ test-bun: test-bun-normal
 test-bun-normal:
 	{{bun}} test bun_test.ts
 
-test-deno: test-deno-linear test-deno-normal
+[private]
+test-bun-compatibility:
+    {{bun_docker}}:1.0.0 test bun_test.ts
+    {{bun_docker}}:1.1.0 test bun_test.ts
+    {{bun_docker}}:1.2.0 test bun_test.ts
+    {{bun_docker}}:1.3.0 test bun_test.ts
 
+test-deno: test-deno-linear test-deno-normal
 [private]
 test-deno-linear $DENO_V8_FLAGS="--enable-experimental-regexp-engine":
 	{{deno}} test deno_test.ts --no-check --allow-read
@@ -43,17 +49,14 @@ test-node-esm: test-node-esm-linear test-node-esm-normal
 [private]
 test-node-esm-linear:
 	{{ if node_has_esm_support == true { node + " " + experiment_engine_flag + " node_test.js" } else { "" } }}
-
 [private]
 test-node-esm-normal:
 	{{ if node_has_esm_support == true { node + " node_test.js" } else { "" } }}
 
 test-node-compatibility: test-node-compatibility-cjs test-node-compatibility-esm
-
 [private]
 test-node-compatibility-cjs:
 	npx nve '0.9.1,0.10.0,0.11.0,0.12.0,4.0.0,5.0.0,6.0.0,7.0.0,8.0.0,9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.cjs
-
 [private]
 test-node-compatibility-esm:
 	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.js
@@ -102,8 +105,9 @@ deno := if `command -v deno || true` =~ ".+" {
 	"docker run --rm --entrypoint 'deno' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' --env DENO_V8_FLAGS docker.io/denoland/deno:latest"
 }
 
+bun_docker := "docker run --rm --entrypoint 'bun' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/oven/bun"
 bun := if `command -v bun || true` =~ ".+" {
 	"bun"
 } else {
-	"docker run --rm --entrypoint 'bun' --workdir '/lregexp' --mount 'type=bind,source=.,target=/lregexp' docker.io/oven/bun:latest"
+     bun_docker + ":latest"
 }
