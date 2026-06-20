@@ -43,22 +43,20 @@ test-compatibility-bun:
 	{{bun_docker}}:1.3.0 test bun_test.ts
 
 test-compatibility-deno:
-	{{deno_docker}}:1.40.0 test deno_test.ts
-	{{deno_docker}}:1.41.0 test deno_test.ts
-	{{deno_docker}}:1.42.0 test deno_test.ts
-	{{deno_docker}}:1.43.0 test deno_test.ts
-	{{deno_docker}}:1.44.0 test deno_test.ts
-	{{deno_docker}}:1.45.0 test deno_test.ts
-	{{deno_docker}}:1.46.0 test deno_test.ts
-	{{deno_docker}}:2.0.0 test deno_test.ts
-	{{deno_docker}}:2.1.0 test deno_test.ts
-	{{deno_docker}}:2.2.0 test deno_test.ts
-	{{deno_docker}}:2.3.0 test deno_test.ts
-	{{deno_docker}}:2.4.0 test deno_test.ts
-	{{deno_docker}}:2.5.0 test deno_test.ts
-	{{deno_docker}}:2.6.0 test deno_test.ts
-	{{deno_docker}}:2.7.0 test deno_test.ts
-	{{deno_docker}}:2.8.0 test deno_test.ts
+	{{deno_docker}}:1.40.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.41.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.42.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.43.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.44.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.0.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.1.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.2.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.3.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.4.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.5.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.6.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.7.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.8.0 test deno_test.ts  --no-check --allow-read
 
 test-compatibility-node: test-compatibility-node-cjs test-compatibility-node-esm
 

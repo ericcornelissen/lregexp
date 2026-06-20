@@ -147,4 +147,4 @@ jobs:
           npm clean-install
           pip install universalmutator
       - name: Run mutation tests
-        run: just test-mutation
+        run: just mutation
