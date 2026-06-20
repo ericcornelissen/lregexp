@@ -2,7 +2,7 @@
 
 import { test, expect } from "bun:test";
 
-import lRegExp from "@ericcornelissen/lregexp";
+import lRegExp from "./index.js";
 
 test("lRegExp should have no effects", () => {
 	const start = performance.now();
