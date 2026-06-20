@@ -2,5 +2,5 @@
 
 mutants/
 node_modules/
-killed.txt
-notkilled.txt
+killed*.txt
+notkilled*.txt

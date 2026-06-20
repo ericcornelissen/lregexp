@@ -129,6 +129,4 @@ jobs:
           npm clean-install
           pip install universalmutator
       - name: Run mutation tests
-        run: |
-          just test-mutation
-          if [ -s notkilled.txt ]; then exit 1; fi
+        run: just test-mutation

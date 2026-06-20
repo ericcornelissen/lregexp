@@ -61,9 +61,21 @@ test-node-compatibility-esm:
 test-rewrite:
 	node --test --enable-experimental-regexp-engine rewrite_test.js
 
-test-mutation:
-	mutate --mutantDir mutants index.js
-	analyze_mutants --mutantDir mutants index.js "just test-node-esm"
+test-mutation: test-mutation-cjs test-mutation-esm
+[private]
+test-mutation-esm:
+	mutate --mutantDir mutants index.js javascript
+	analyze_mutants --mutantDir mutants index.js 'just test-node-esm'
+	mv killed.txt killed-esm.txt
+	mv notkilled.txt notkilled-esm.txt
+	if [ -s notkilled-esm.txt ]; then exit 1; fi
+[private]
+test-mutation-cjs:
+	mutate --mutantDir mutants index.cjs javascript
+	analyze_mutants --mutantDir mutants index.cjs 'just test-node-cjs'
+	mv killed.txt killed-cjs.txt
+	mv notkilled.txt notkilled-cjs.txt
+	if [ -s notkilled-cjs.txt ]; then exit 1; fi
 
 true:="true"
 false:="false"
