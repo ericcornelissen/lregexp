@@ -10,8 +10,15 @@ permissions: read-all
 
 jobs:
   test:
-    name: Test against latest runtime dependency versions
+    name: Test against latest runtime dependency versions on ${{ matrix.runtime }}
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime:
+          - bun
+          - deno
+          - node
     steps:
       - name: Checkout repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -31,4 +38,6 @@ jobs:
           npm update --omit dev --omit optional --omit peer
           npm ls --all --omit dev --omit optional --omit peer
       - name: Run tests
-        run: just test
+        run: just "test-${RUNTIME}"
+        env:
+          RUNTIME: ${{ matrix.runtime }}
