@@ -57,6 +57,7 @@ test-compatibility-deno:
 	{{deno_docker}}:2.6.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.7.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.8.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.9.0 test deno_test.ts  --no-check --allow-read
 
 test-compatibility-node: test-compatibility-node-cjs test-compatibility-node-esm
 
