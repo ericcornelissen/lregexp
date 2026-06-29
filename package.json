@@ -37,7 +37,7 @@
   "devDependencies": {
     "fast-check": "4.8.0",
     "is-supported-regexp-flag": "2.0.0",
-    "mock-property": "1.1.0",
+    "mock-property": "1.1.2",
     "tinybench": "6.0.0"
   }
 }
