@@ -41,6 +41,7 @@ test-compatibility-bun:
 	{{bun_docker}}:1.1.0 test bun_test.ts
 	{{bun_docker}}:1.2.0 test bun_test.ts
 	{{bun_docker}}:1.3.0 test bun_test.ts
+	{{bun_docker}}:1.3.14 test bun_test.ts
 
 test-compatibility-deno:
 	{{deno_docker}}:1.40.0 test deno_test.ts  --no-check --allow-read
@@ -48,6 +49,8 @@ test-compatibility-deno:
 	{{deno_docker}}:1.42.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:1.43.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:1.44.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.45.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.46.3 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.0.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.1.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.2.0 test deno_test.ts  --no-check --allow-read
@@ -58,16 +61,17 @@ test-compatibility-deno:
 	{{deno_docker}}:2.7.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.8.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.9.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:2.9.1 test deno_test.ts  --no-check --allow-read
 
 test-compatibility-node: test-compatibility-node-cjs test-compatibility-node-esm
 
 [private]
 test-compatibility-node-cjs:
-	npx nve '0.8.6,0.9.1,0.10.0,0.11.0,0.12.0,4.0.0,5.0.0,6.0.0,7.0.0,8.0.0,9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.cjs
+	npx nve '0.8.6,0.9.1,0.10.0,0.11.0,0.12.0,4.0.0,5.0.0,6.0.0,7.0.0,8.0.0,9.0.0,10.0.0,11.0.0,12.0.0,13.0.0,14.0.0,15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0,26.4.0' node node_test.cjs
 
 [private]
 test-compatibility-node-esm:
-	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0' node node_test.js
+	npx nve '15.0.0,16.0.0,17.0.0,18.0.0,19.0.0,20.0.0,21.0.0,22.0.0,23.0.0,24.0.0,25.0.0,26.0.0,26.4.0' node node_test.js
 
 
 test-deno: test-deno-linear test-deno-normal
