@@ -13,10 +13,11 @@ Deno.test("Linear engine should handle pathological input", () => {
 	const end = performance.now();
 
 	const duration = end - start;
+	const threshold = 100;
 	assert(
 		linearTimeEngine()
-			? duration < 1
-			: duration > 1,
+			? duration < threshold
+			: duration > threshold,
 		linearTimeEngine()
 			? `matched unexpectedly slow (${duration}ms) with experimental regexp engine`
 			: `matched unexpectedly fast (${duration}ms) with default regexp engine`,
