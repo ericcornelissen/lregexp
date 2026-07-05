@@ -2,7 +2,7 @@
 
 import { assert } from "jsr:@std/assert";
 
-import lRegExp from "npm:@ericcornelissen/lregexp";
+import lRegExp from "./index.js";
 
 Deno.test("Linear engine should handle pathological input", () => {
 	const start = performance.now();
