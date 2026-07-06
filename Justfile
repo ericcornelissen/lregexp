@@ -48,6 +48,8 @@ test-compatibility-deno:
 	{{deno_docker}}:1.42.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:1.43.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:1.44.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.45.0 test deno_test.ts  --no-check --allow-read
+	{{deno_docker}}:1.46.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.0.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.1.0 test deno_test.ts  --no-check --allow-read
 	{{deno_docker}}:2.2.0 test deno_test.ts  --no-check --allow-read
