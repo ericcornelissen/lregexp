@@ -30,7 +30,7 @@
       "dependencies": [
         "npm:fast-check@4.8.0",
         "npm:is-supported-regexp-flag@2.0.0",
-        "npm:mock-property@1.1.0",
+        "npm:mock-property@1.1.2",
         "npm:tinybench@6.0.0"
       ]
     }

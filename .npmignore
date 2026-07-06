@@ -3,12 +3,12 @@
 /*
 
 ## Allowlist
-!index.d.ts
-!index.js
 !LICENSE
-!package.json
 !README.md
 !SECURITY.md
-
 !index.cjs
+!index.d.ts
+!index.js
 !is-supported-regexp-flag.cjs
+!is-supported-regexp-flag.js
+!package.json
