@@ -41,6 +41,7 @@ test-compatibility-bun:
 	{{bun_docker}}:1.1.0 test bun_test.ts
 	{{bun_docker}}:1.2.0 test bun_test.ts
 	{{bun_docker}}:1.3.0 test bun_test.ts
+	{{bun_docker}}:1.4.0 test bun_test.ts
 
 test-compatibility-deno:
 	{{deno_docker}}:1.40.0 test deno_test.ts  --no-check --allow-read
