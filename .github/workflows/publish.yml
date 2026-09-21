@@ -11,7 +11,7 @@ permissions: read-all
 jobs:
   npm:
     name: npm
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       id-token: write # For trusted publishing
     environment:
