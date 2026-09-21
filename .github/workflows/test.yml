@@ -150,3 +150,23 @@ jobs:
           pip install universalmutator
       - name: Run mutation tests
         run: just mutation
+  test-rewrite:
+    name: Rewrite
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+      - name: Install Just
+        uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - name: Install dependencies
+        run: |
+          npm clean-install
+      - name: Run rewrite tests
+        run: just test-rewrite
