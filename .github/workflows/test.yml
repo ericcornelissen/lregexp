@@ -12,7 +12,7 @@ permissions: read-all
 jobs:
   test-bun:
     name: Bun ${{ matrix.bun-version }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -37,7 +37,7 @@ jobs:
         run: just test-bun
   test-deno:
     name: Deno ${{ matrix.deno-version }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -74,7 +74,7 @@ jobs:
         run: just test-deno
   test-node:
     name: Node.js ${{ matrix.node-version }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -131,7 +131,7 @@ jobs:
     name: Mutation
     needs:
       test-node
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -152,7 +152,7 @@ jobs:
         run: just mutation
   test-rewrite:
     name: Rewrite
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
